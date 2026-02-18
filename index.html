@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heladeria Dulce Frio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🍦</span>
+        <span class="logo-text">Dulce Frío</span>
+      </div>
+      <button class="cart-btn" id="cartToggle">
+        🛒 <span id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Los mejores helados de la ciudad</h1>
+    <p>Sabores artesanales hechos con ingredientes naturales</p>
+  </section>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- FILTROS -->
+    <section class="filters">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="clasico">Clásicos</button>
+      <button class="filter-btn" data-filter="frutal">Frutales</button>
+      <button class="filter-btn" data-filter="especial">Especiales</button>
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section class="catalog" id="catalog"></section>
+
+  </main>
+
+  <!-- CARRITO LATERAL -->
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h2>Tu Pedido</h2>
+      <button class="close-cart" id="closeCart">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p class="empty-msg">Tu carrito está vacío 🍦</p>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="total">
+        Total: <strong id="cartTotal">$0</strong>
+      </div>
+      <button class="order-btn" id="orderBtn">Hacer Pedido</button>
+    </div>
+  </aside>
+
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- MODAL CONFIRMACION -->
+  <div class="modal" id="orderModal">
+    <div class="modal-box">
+      <div class="modal-icon">🎉</div>
+      <h2>¡Pedido Confirmado!</h2>
+      <p>Tu helado está siendo preparado con mucho amor.</p>
+      <p class="modal-time">Tiempo estimado: <strong>10-15 min</strong></p>
+      <button class="modal-close" id="modalClose">Hacer otro pedido</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
