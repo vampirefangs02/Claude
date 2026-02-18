@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      padding: 24px;
+      width: 280px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .logo-emoji { font-size: 2rem; }
+    .logo-text  { font-size: 1.2rem; font-weight: 800; }
+    p {
+      font-size: 0.82rem;
+      color: #9ca3af;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .screens {
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      font-size: 0.8rem;
+      color: #d1d5db;
+    }
+    .screens p { margin: 0 0 8px; color: #fff; font-weight: 700; font-size: 0.85rem; }
+    .screens ul { padding-left: 16px; color: #9ca3af; }
+    .screens li { margin-bottom: 4px; }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover   { opacity: 0.85; }
+    button:active  { opacity: 0.7; }
+    #status {
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: #6b7280;
+      text-align: center;
+      min-height: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <span class="logo-emoji">🍦</span>
+    <span class="logo-text">Dulce Frío</span>
+  </div>
+
+  <p>Genera todos los frames del app de helados directamente en tu proyecto de Figma.</p>
+
+  <div class="screens">
+    <p>Frames que se generan:</p>
+    <ul>
+      <li>Home – Catalogo completo</li>
+      <li>Card – Componente de sabor</li>
+      <li>Carrito lateral abierto</li>
+      <li>Modal de confirmacion</li>
+    </ul>
+  </div>
+
+  <button id="generateBtn">Generar Diseño</button>
+  <div id="status"></div>
+
+  <script>
+    document.getElementById('generateBtn').addEventListener('click', () => {
+      document.getElementById('status').textContent = 'Generando frames...';
+      document.getElementById('generateBtn').disabled = true;
+      parent.postMessage({ pluginMessage: { type: 'generate' } }, '*');
+    });
+
+    window.onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      if (!msg) return;
+      if (msg.type === 'done') {
+        document.getElementById('status').textContent = 'Listo! Revisa tu canvas.';
+        document.getElementById('generateBtn').disabled = false;
+      }
+      if (msg.type === 'error') {
+        document.getElementById('status').textContent = 'Error: ' + msg.message;
+        document.getElementById('generateBtn').disabled = false;
+      }
+    };
+  </script>
+</body>
+</html>
